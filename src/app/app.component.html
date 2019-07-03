@@ -1,21 +1,92 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="header">
+  <div class="nobody">
+    Добро пожаловать {{user ? user.login : 'незнакомец'}}!
+    <button class="login" *ngIf="!user" (click)="loginWindow = true">Log In</button>
+    <button class="logout" *ngIf="user" (click)="user = null">Log Out</button>
+  </div>
+
+  <input type="text" placeholder="поиск" [(ngModel)]="searchText">
+  <button class="add_book" *ngIf="user" (click)="addBookWindow = !addBookWindow">Добавить книгу</button>
+  <button class="basket" (click)="basketWindow = true">
+    <p>Корзина({{basket.totalCount}})</p>
+    <p>Всего: {{basket.totalPrice}}$</p>
+  </button>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div class="login_window" *ngIf="loginWindow">
+  <form ngNativeValidate #loginForm="ngForm" (ngSubmit)="onLogIn(loginForm.value); loginForm.resetForm()">
+    <input [ngModel] name="login" type="text" placeholder="login" required>
+    <input [ngModel] name="pass" type="password" placeholder="password" required>
+    <button class="submit" type="submit">Log in</button>
+  </form>
+  <button class="X" (click)="loginWindow = false">X</button>
+  <div class="error" *ngIf="error"> Пароль или логин не совпадают!</div>
+</div>
+
+<div class="body">
+    <ul class="ul" *ngIf="books">
+      <dl *ngFor="let book of books | filter:searchText">
+        <div class="test">
+<!--        <button class="test" (click)="book.more = !book.more"> INFOOO</button>-->
+          <p class="book_name" (click)="book.more = !book.more">{{book.name}}</p>
+          <button class="delete" *ngIf="user" (click)="delete = !delete; tempBook = book">X</button>
+          <button class="more" *ngIf="user" (click)="edit = !edit; tempBook = book">Ред.</button>
+          <button class="add" *ngIf="user" (click)="buy(book)">Купить</button>
+          <div class="more_window" *ngIf="book.more">
+            <p class="more_year"> Год издания: {{book.year}}</p>
+            <p class="more_price" > Цена: {{book.price}}</p>
+            <p> Описание: {{book.description}}</p>
+          </div>
+        </div>
+        <div class="old_book" *ngIf="book.year < 1990"></div>
+      </dl>
+    </ul>
+</div>
+
+<div class="delete_window" *ngIf="delete">
+    <p>Вы уверены что хотите удалить "{{tempBook.name}}"?</p>
+    <button class="yes" (click)="onDelete(tempBook)">Yes</button>
+    <button class="no" (click)="delete = false; tempBook = null">No</button>
+</div>
+
+<div class="basket_window" *ngIf="basketWindow">
+
+</div>
+
+<div class="add_book_window" *ngIf="addBookWindow">
+  <button class="X" (click)="addBookWindow = !addBookWindow">X</button>
+  <form ngNativeValidate #addForm="ngForm" (ngSubmit)="add(addForm.value); addForm.resetForm()">
+    <input class="full" type="text" placeholder="название" name="name" ngModel required>
+    <input class="year" type="number" placeholder="год" name="year" ngModel required>
+    <input class="price" type="number" placeholder="цена" name="price" ngModel required>
+    <input class="full" type="text" placeholder="описание" name="description" ngModel required>
+    <input class="submit" type="submit" value="Добавить">
+  </form>
+</div>
+
+<div class="add_book_window" *ngIf="edit">
+  <button class="X" (click)="edit = !edit">X</button>
+  <form ngNativeValidate #addForm="ngForm" (ngSubmit)="onEdit(addForm.value); addForm.resetForm()">
+    <input class="full" type="text" placeholder="название" name="name" ngModel required>
+    <input class="year" type="number" placeholder="год" name="year" ngModel required>
+    <input class="price" type="number" placeholder="цена" name="price" ngModel required>
+    <input class="full" type="text" placeholder="описание" name="description" ngModel required>
+    <input class="submit" type="submit" value="Изменить">
+  </form>
+</div>
+
+<div class="add_book_window" *ngIf="basketWindow">
+  <button class="X" (click)="basketWindow = !basketWindow">X</button>
+  <ul class="basket_list">
+    <dl *ngFor="let book of basket.list">
+      <p class="name">{{book.name}}: {{book.count}}</p>
+      <button class="minus" (click)="minus(book)">-</button>
+      <button class="plus" (click)="plus(book)">+</button>
+    </dl>
+  </ul>
+  <p class="total">Всего книг: {{basket.totalCount}}</p>
+  <p class="total">Общая сумма: {{basket.totalPrice}}</p>
+</div>
 
 <router-outlet></router-outlet>
