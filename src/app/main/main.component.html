@@ -1,0 +1,25 @@
+<div class="body">
+<input type="text" placeholder="поиск" [(ngModel)]="searchText" appSearch>
+    <ul class="ul" *ngIf="books">
+      <dl *ngFor="let book of books | filter:searchText">
+        <div class="test">
+          <p class="book_name" (click)="book.more = !book.more">{{book.name}}</p>
+          <button class="delete" *ngIf="user" (click)="delete = !delete; tempBook = book">X</button>
+          <button class="more" *ngIf="user" routerLink="/edit" (click)="edit(book)">Ред.</button>
+          <button class="add" *ngIf="user" (click)="buy(book)">Купить</button>
+          <div class="more_window" *ngIf="book.more">
+            <p class="more_year"> Год издания: {{book.year}}</p>
+            <p class="more_price" > Цена: {{book.price}}</p>
+            <p> Описание: {{book.description}}</p>
+          </div>
+        </div>
+        <div class="old_book" *ngIf="book.year < 1990"></div>
+      </dl>
+    </ul>
+</div>
+
+<div class="delete_window" *ngIf="delete">
+    <p>Вы уверены что хотите удалить "{{tempBook.name}}"?</p>
+    <button class="yes" (click)="onDelete(tempBook)">Yes</button>
+    <button class="no" (click)="delete = false; tempBook = null">No</button>
+</div>

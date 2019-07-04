@@ -1,0 +1,12 @@
+<div class="add_book_window">
+  <ul class="basket_list">
+    <dl *ngFor="let book of basket.list">
+      <p class="name">{{book.name}}: {{book.count}}</p>
+      <button class="minus" (click)="minus(book)">-</button>
+      <button class="plus" (click)="plus(book)">+</button>
+      <button class="delete" (click)="delete(book)">X</button>
+    </dl>
+  </ul>
+  <p class="total">Всего книг: {{basket.totalCount}}</p>
+  <p class="total">Общая сумма: {{basket.totalPrice}} $</p>
+</div>

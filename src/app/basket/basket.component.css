@@ -1,0 +1,61 @@
+.add_book_window {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  width: 500px;
+  min-height: 400px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 2px solid black;
+  border-radius: 25px;
+}
+
+.basket_list {
+  margin-top: 50px;
+  color: white;
+  font-size: 25px;
+  position: relative;
+  width: 80%;
+  left: 10%;
+}
+
+.basket_list dl {
+  position: relative;
+}
+
+.basket_list button {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+.basket_list .plus {
+  right: 40px;
+  background-color: #5ec54e;
+}
+
+.basket_list .minus {
+  right: 70px;
+  background-color: #dc8f4e;
+}
+
+.basket_list .delete {
+  right: 100px;
+  background-color: #dc676b;
+}
+
+.total {
+  color: white;
+  font-size: 25px;
+  text-align: center;
+}
+
+.basket_list .name {
+  display: inline-block;
+}

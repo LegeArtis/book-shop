@@ -1,0 +1,73 @@
+.add_book_window {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  width: 500px;
+  min-height: 400px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 2px solid black;
+  border-radius: 25px;
+}
+
+.add_book_window form {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 90%;
+  top: 10%;
+}
+
+.add_book_window input {
+  position: relative;
+  left: 25px;
+  border: 2px solid black;
+  border-radius: 15px;
+  display: block;
+  width: 350px;
+  height: 40px;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.add_book_window .year {
+  display: inline-block;
+  width: 100px;
+  left: 50px;
+}
+
+.add_book_window .price {
+  display: inline-block;
+  width: 100px;
+  left: 150px;
+}
+
+.add_book_window .submit {
+  background-color: #5ec54e;
+}
+
+.cheat {
+  color: white;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  width: 80%;
+  position: absolute;
+  left: 10%;
+  top: 15%;
+}
+
+.ok {
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  width: 70%;
+  background-color: #5ec54e;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

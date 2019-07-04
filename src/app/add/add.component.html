@@ -1,0 +1,11 @@
+<div class="add_book_window">
+  <form ngNativeValidate *ngIf="user" #addForm="ngForm" (ngSubmit)="add(addForm.value); addForm.resetForm()">
+    <input class="full" type="text" placeholder="название" name="name" ngModel required>
+    <input class="year" type="number" placeholder="год" name="year" ngModel required>
+    <input class="price" type="number" placeholder="цена" name="price" ngModel required>
+    <input class="full" type="text" placeholder="описание" name="description" ngModel required>
+    <input class="submit" type="submit" value="Добавить">
+  </form>
+  <div class="cheat" *ngIf="!user">Для добавления книг нужно авторизироватся!</div>
+  <div class="ok" *ngIf="addOk">Книга успешно добавлена в список!</div>
+</div>

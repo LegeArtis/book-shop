@@ -1,0 +1,63 @@
+.login_window {
+  z-index: 99;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 150px;
+  width: 600px;
+  height: 400px;
+  border-radius: 30px;
+  background-color: rgba(2,2,2,0.6);
+  border: 2px solid black;
+}
+
+
+
+.login_window form {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+
+.login_window input {
+  display: block;
+  position: relative;
+  width: 250px;
+  height: 35px;
+  left: 50%;
+  border-radius: 10px;
+  transform: translateX(-50%);
+  margin-top: 50px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.login_window .error {
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 100px;
+  font-size: 30px;
+  background-color: orangered;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
+.login_window .submit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50px;
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+  font-weight: bold;
+  background-color: #5ec54e;
+}
